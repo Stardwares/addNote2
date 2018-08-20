@@ -2,18 +2,17 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Nodes" representedClassName="Nodes" syncable="YES" codeGenerationType="class">
         <attribute name="begDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="idNode" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="updateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="picturesN" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pictures" inverseName="nodesP" inverseEntity="Pictures" syncable="YES"/>
     </entity>
     <entity name="Pictures" representedClassName="Pictures" syncable="YES" codeGenerationType="class">
-        <attribute name="picture" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="idNode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Nodes" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="nodesP" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Nodes" inverseName="picturesN" inverseEntity="Nodes" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Nodes" positionX="-344" positionY="-63" width="128" height="133"/>
+        <element name="Nodes" positionX="-344" positionY="-63" width="128" height="118"/>
         <element name="Pictures" positionX="-20" positionY="-108" width="128" height="73"/>
     </elements>
 </model>

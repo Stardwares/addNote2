@@ -143,20 +143,32 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s5i-2h-Scu">
-                                <rect key="frame" x="8" y="382" width="359" height="30"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата добавления" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmC-Bt-KEB">
+                                <rect key="frame" x="8" y="382" width="138" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bN7-gd-zA5">
-                                <rect key="frame" x="8" y="420" width="359" height="30"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата обновления" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGw-dr-kL3">
+                                <rect key="frame" x="8" y="411" width="138.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-1x-7BG">
+                                <rect key="frame" x="166" y="382" width="41" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JZ-ts-n4O">
+                                <rect key="frame" x="166" y="410.5" width="41" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nL-oz-3ua">
-                                <rect key="frame" x="107" y="466" width="160" height="30"/>
+                                <rect key="frame" x="107.5" y="439" width="160" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ZAX-B3-clb"/>
                                 </constraints>
@@ -170,36 +182,46 @@
                         <constraints>
                             <constraint firstItem="rvQ-dj-Hi0" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="2wL-3d-1Qg"/>
                             <constraint firstItem="Qg6-qu-pbK" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="4T4-qp-amg"/>
-                            <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="s5i-2h-Scu" secondAttribute="trailing" constant="8" id="Em7-hU-klJ"/>
+                            <constraint firstItem="8JZ-ts-n4O" firstAttribute="top" secondItem="0ZP-1x-7BG" secondAttribute="bottom" constant="8" id="8XV-WW-xLX"/>
+                            <constraint firstItem="8JZ-ts-n4O" firstAttribute="top" secondItem="0ZP-1x-7BG" secondAttribute="bottom" constant="8" id="8Y7-x0-dB8"/>
+                            <constraint firstItem="8nL-oz-3ua" firstAttribute="top" secondItem="8JZ-ts-n4O" secondAttribute="bottom" constant="8" id="97a-tX-6Cu"/>
+                            <constraint firstItem="mmC-Bt-KEB" firstAttribute="top" secondItem="Qg6-qu-pbK" secondAttribute="bottom" constant="8" id="E6R-48-4mP"/>
                             <constraint firstItem="18G-SM-ijA" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="GIf-a0-gZ6"/>
                             <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="18G-SM-ijA" secondAttribute="trailing" constant="8" id="HdH-al-BnG"/>
+                            <constraint firstItem="VGw-dr-kL3" firstAttribute="top" secondItem="mmC-Bt-KEB" secondAttribute="bottom" constant="8" id="Hp8-0X-cRi"/>
                             <constraint firstItem="xs6-2e-JBM" firstAttribute="top" secondItem="rvQ-dj-Hi0" secondAttribute="bottom" constant="8" id="Jxr-2O-hGs"/>
                             <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="xXF-ZP-k0G" secondAttribute="trailing" constant="8" id="LtH-lU-aSb"/>
                             <constraint firstItem="rvQ-dj-Hi0" firstAttribute="top" secondItem="BcQ-Zt-Sk8" secondAttribute="top" constant="40" id="Nlh-NJ-LPl"/>
+                            <constraint firstItem="VGw-dr-kL3" firstAttribute="top" secondItem="mmC-Bt-KEB" secondAttribute="bottom" constant="8" id="Q9D-OX-5i1"/>
+                            <constraint firstItem="0ZP-1x-7BG" firstAttribute="leading" secondItem="mmC-Bt-KEB" secondAttribute="trailing" constant="20" id="Qd2-Q3-r6d"/>
                             <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="xs6-2e-JBM" secondAttribute="trailing" constant="8" id="T1q-sQ-ta8"/>
                             <constraint firstItem="8nL-oz-3ua" firstAttribute="centerX" secondItem="Co5-Ur-2p8" secondAttribute="centerX" id="T68-1u-kmr"/>
-                            <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="bN7-gd-zA5" secondAttribute="trailing" constant="8" id="TQO-DI-AKk"/>
                             <constraint firstItem="Qg6-qu-pbK" firstAttribute="top" secondItem="xXF-ZP-k0G" secondAttribute="bottom" constant="8" id="Uwe-Vp-4WS"/>
-                            <constraint firstItem="8nL-oz-3ua" firstAttribute="top" secondItem="bN7-gd-zA5" secondAttribute="bottom" constant="16" id="hHi-GY-ffD"/>
-                            <constraint firstItem="bN7-gd-zA5" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="k4H-gP-RhI"/>
-                            <constraint firstItem="s5i-2h-Scu" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="mA7-WT-SNW"/>
+                            <constraint firstItem="0ZP-1x-7BG" firstAttribute="top" secondItem="Qg6-qu-pbK" secondAttribute="bottom" constant="8" id="XAC-xn-Ya2"/>
+                            <constraint firstItem="mmC-Bt-KEB" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="Xvp-03-txV"/>
+                            <constraint firstItem="VGw-dr-kL3" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="b42-Lg-KfX"/>
+                            <constraint firstItem="8JZ-ts-n4O" firstAttribute="leading" secondItem="VGw-dr-kL3" secondAttribute="trailing" constant="20" id="bKz-n3-bY4"/>
+                            <constraint firstItem="8JZ-ts-n4O" firstAttribute="top" secondItem="0ZP-1x-7BG" secondAttribute="bottom" constant="8" id="eGa-xP-Sd5"/>
+                            <constraint firstItem="8nL-oz-3ua" firstAttribute="top" secondItem="8JZ-ts-n4O" secondAttribute="bottom" constant="8" id="jXL-er-APg"/>
                             <constraint firstItem="18G-SM-ijA" firstAttribute="top" secondItem="xs6-2e-JBM" secondAttribute="bottom" constant="34" id="oVq-kN-AZQ"/>
-                            <constraint firstItem="s5i-2h-Scu" firstAttribute="top" secondItem="Qg6-qu-pbK" secondAttribute="bottom" constant="8" id="pSV-1g-TvV"/>
+                            <constraint firstItem="0ZP-1x-7BG" firstAttribute="top" secondItem="Qg6-qu-pbK" secondAttribute="bottom" constant="8" id="qHL-S5-WkE"/>
                             <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="rvQ-dj-Hi0" secondAttribute="trailing" constant="8" id="soN-YZ-izx"/>
                             <constraint firstItem="BcQ-Zt-Sk8" firstAttribute="trailing" secondItem="Qg6-qu-pbK" secondAttribute="trailing" constant="8" id="tAb-N0-x2h"/>
-                            <constraint firstItem="bN7-gd-zA5" firstAttribute="top" secondItem="s5i-2h-Scu" secondAttribute="bottom" constant="8" id="tc3-5C-Lgn"/>
                             <constraint firstItem="xXF-ZP-k0G" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="uh1-Zi-DiU"/>
+                            <constraint firstItem="8JZ-ts-n4O" firstAttribute="top" secondItem="0ZP-1x-7BG" secondAttribute="bottom" constant="8" id="z0u-Pb-9Pu"/>
                             <constraint firstItem="xXF-ZP-k0G" firstAttribute="top" secondItem="18G-SM-ijA" secondAttribute="bottom" constant="8" id="zvM-vl-Dyi"/>
                             <constraint firstItem="xs6-2e-JBM" firstAttribute="leading" secondItem="BcQ-Zt-Sk8" secondAttribute="leading" constant="8" id="zxj-Jw-Rew"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BcQ-Zt-Sk8"/>
                     </view>
                     <connections>
-                        <outlet property="begDateText" destination="s5i-2h-Scu" id="yC8-Sb-I7X"/>
+                        <outlet property="begDateLabel" destination="0ZP-1x-7BG" id="0cg-eu-HGH"/>
                         <outlet property="colleectionViewImages" destination="Qg6-qu-pbK" id="SFY-R9-WkQ"/>
                         <outlet property="infoNoteText" destination="xXF-ZP-k0G" id="0dp-1S-qUV"/>
+                        <outlet property="label1" destination="mmC-Bt-KEB" id="Tl3-52-vLk"/>
+                        <outlet property="label2" destination="VGw-dr-kL3" id="BCV-gi-h8R"/>
                         <outlet property="nameNoteText" destination="xs6-2e-JBM" id="Kp7-oO-2Xr"/>
-                        <outlet property="updateDateText" destination="bN7-gd-zA5" id="Y2t-Hv-XU1"/>
+                        <outlet property="updateDateLabel" destination="8JZ-ts-n4O" id="I9x-I3-PXf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YyF-bZ-Pp9" userLabel="First Responder" sceneMemberID="firstResponder"/>

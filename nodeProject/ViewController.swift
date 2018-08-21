@@ -62,10 +62,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController?.pushViewController(vc2, animated: true)
         vc2.titl = names[indexPath.row].name!
         vc2.info = (names[indexPath.row].info)!
-        let adv: Int = (names[indexPath.row].picturesN?.count)!
-        for index in 0...adv {
-            vc2.arrayImage.append(UIImage(data: names[indexPath.row].picturesN?.allObjects[index] as! Data)!)
+        
+        let dateBegCount = names[indexPath.row].begDate?.hashValue
+        let dateEndCount = names[indexPath.row].updateDate?.hashValue
+        
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "dd-MM-YYYY"
+     
+        if dateBegCount != nil {
+            vc2.begDateString = dateFormater.string(from: names[indexPath.row].begDate!)
         }
+        
+        if dateEndCount != nil {
+            vc2.begDateString = dateFormater.string(from: names[indexPath.row].updateDate!)
+        }
+        
+        let imageArray = names[indexPath.row].picturesN?.sortedArray(using: [NSSortDescriptor(key: "picture", ascending: true)])
+        
+        for image in imageArray ?? [] {
+            let img = UIImage(data: (image as! Pictures).picture!)
+            vc2.arrayImage.append(img!)
+        }
+        
         vc2.type = 1
         vc2.isEdit = 1
         vc2.delegate = self

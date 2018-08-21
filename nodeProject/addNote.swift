@@ -13,8 +13,11 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     @IBOutlet weak var nameNoteText: UITextField!
     @IBOutlet weak var infoNoteText: UITextView!
     @IBOutlet weak var colleectionViewImages: UICollectionView!
-    @IBOutlet weak var begDateText: UITextField!
-    @IBOutlet weak var updateDateText: UITextField!
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var begDateLabel: UILabel!
+    @IBOutlet weak var updateDateLabel: UILabel!
+    
     
     var names = [Nodes]()
     var picturesNode = [Pictures]()
@@ -26,6 +29,8 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     var arrayImage: [UIImage] = [UIImage]()
     var delegate: addNoteDelegate? = nil
     var isEdit = 0
+    var begDateString :String = "None"
+    var updateDateString :String = "None"
     
     @IBAction func saveNote(_ sender: Any) {
         self.saveName(name: nameNoteText.text!, info: infoNoteText.text, pictures: arrayImage)
@@ -74,13 +79,13 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
             for index in 0...pictures.count - 1 {
                 let pictureN = UIImageJPEGRepresentation(pictures[index], 0.0)
                 pictureSave.setValue(pictureN, forKey: "picture")
+                picturesNode.append(pictureSave)
                 node.addToPicturesN(pictureSave)
             }
         }
  
         do {
             try context.save()
-            picturesNode.append(pictureSave)
             names.append(node)
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
@@ -94,7 +99,17 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     func setup(){
         nameNoteText.text = titl
         infoNoteText.text = info
+        begDateLabel.text = begDateString
+        updateDateLabel.text = updateDateString
+        if isEdit == 1 {
+            label1.isHidden = false
+            label2.isHidden = false
+            begDateLabel.isHidden = false
+            updateDateLabel.isHidden = false
+        }
+        
      //   arrayImage.append(picture)
+        
         colleectionViewImages.reloadData()
     }
     

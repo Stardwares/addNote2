@@ -8,7 +8,7 @@
 
 import UIKit
 
-class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, ImageViewCellDelegate {
+class addNote: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, ImageViewCellDelegate {
     
     @IBOutlet weak var nameNoteText: UITextField!
     @IBOutlet weak var infoNoteText: UITextView!
@@ -18,8 +18,8 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     @IBOutlet weak var begDateLabel: UILabel!
     @IBOutlet weak var updateDateLabel: UILabel!
     
-    
     var names = [Nodes]()
+    var indexNode :Int = 0
     var picturesNode = [Pictures]()
     var titl :String = ""
     var info = ""
@@ -28,7 +28,7 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     let imagePicker =  UIImagePickerController()
     var arrayImage: [UIImage] = [UIImage]()
     var delegate: addNoteDelegate? = nil
-    var isEdit = 0
+    var isEdit :Int = 0
     var begDateString :String = "None"
     var updateDateString :String = "None"
     
@@ -61,34 +61,53 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     func saveName(name: String, info: String, pictures: [UIImage]){
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let node = Nodes(entity: Nodes.entity(), insertInto: context)
-        let pictureSave = Pictures(entity: Pictures.entity(), insertInto: context)
         
-        node.setValue(name, forKey: "name")
-        node.setValue(info, forKey: "info")
+     //   let pictureSave = Pictures(entity: Pictures.entity(), insertInto: context)
         if isEdit == 0
         {
-         node.setValue(NSDate(), forKey: "begDate")
+            node.setValue(name, forKey: "name")
+            node.setValue(info, forKey: "info")
+            node.setValue(NSDate(), forKey: "begDate")
         }
         else
-        {
-         node.setValue(NSDate(), forKey: "updateDate")
+        {   names[indexNode].name = name
+            names[indexNode].info = info
+            names[indexNode].updateDate = NSDate() as Date
+            names[indexNode].picturesN = nil
         }
      
 //        let pictureCount = pictures.count // цикл по колличеству картинок если разберусь с таблицей!!!
         if( pictures.count > 0 ) {
             for index in 0...pictures.count - 1 {
+                let context1 = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                let pictureSave = Pictures(entity: Pictures.entity(), insertInto: context1)
                 let pictureN = UIImageJPEGRepresentation(pictures[index], 0.0)
                 pictureSave.setValue(pictureN, forKey: "picture")
-                picturesNode.append(pictureSave)
+                if isEdit == 1 {
+                names[indexNode].addToPicturesN(pictureSave)
+                }
+                else
+                {
                 node.addToPicturesN(pictureSave)
+                }
+                do {
+                    try context1.save()
+                        picturesNode.append(pictureSave)
+                    
+                } catch let error as NSError {
+                    print("Could not save \(error), \(error.userInfo)")
+                }
+                
             }
         }
- 
-        do {
-            try context.save()
-            names.append(node)
-        } catch let error as NSError {
-            print("Could not save \(error), \(error.userInfo)")
+        if isEdit == 0 {
+            do {
+                try context.save()
+                   names.append(node)
+                
+            } catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+            }
         }
     }
     
@@ -97,8 +116,8 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
     }
     
     func setup(){
-        nameNoteText.text = titl
-        infoNoteText.text = info
+        nameNoteText.text = names[indexNode].name
+        infoNoteText.text = names[indexNode].info
         begDateLabel.text = begDateString
         updateDateLabel.text = updateDateString
         if isEdit == 1 {
@@ -107,9 +126,6 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
             begDateLabel.isHidden = false
             updateDateLabel.isHidden = false
         }
-        
-     //   arrayImage.append(picture)
-        
         colleectionViewImages.reloadData()
     }
     
@@ -118,6 +134,7 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
         arrayImage.insert((info[UIImagePickerControllerOriginalImage] as? UIImage)!, at: arrayImage.count)
         updateCells()
     }
+    
     
     func updateCells() {
         colleectionViewImages.reloadData()
@@ -128,27 +145,6 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
             arrayImage.remove(at: index)
             updateCells()
         }
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayImage.count + 1
-    }
-    
-    // make a cell for each cell index path
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell" , for: indexPath as IndexPath) as! ImageViewCell
-        if( indexPath.row != arrayImage.count)  {
-            cell.index = indexPath.row
-            cell.imageView.image = arrayImage[indexPath.row]
-            cell.delegate = self
-            cell.show()
-        } else {
-            cell.index = indexPath.row
-            cell.imageView.image = nil
-            cell.hidden()
-        }
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -162,7 +158,30 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
             presentImagePicker()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return arrayImage.count + 1
+    }
+    
+    // make a cell for each cell index path
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell" , for: indexPath as IndexPath) as! ImageViewCell
+        if( indexPath.row != arrayImage.count)  {
+            cell.index = indexPath.row
+            cell.imageView.image = arrayImage[indexPath.row]
+            cell.delegate = self
+        } else {
+            cell.index = indexPath.row
+            cell.imageView.image = nil
+        }
+        
+        return cell
+    }
+    
+
 }
+
 
 protocol addNoteDelegate {
     func updateTable()

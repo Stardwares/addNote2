@@ -62,6 +62,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController?.pushViewController(vc2, animated: true)
         vc2.titl = names[indexPath.row].name!
         vc2.info = (names[indexPath.row].info)!
+        vc2.names = [names[indexPath.row]]
+        vc2.indexNode = indexPath.row
         
         let dateBegCount = names[indexPath.row].begDate?.hashValue
         let dateEndCount = names[indexPath.row].updateDate?.hashValue
@@ -74,10 +76,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         if dateEndCount != nil {
-            vc2.begDateString = dateFormater.string(from: names[indexPath.row].updateDate!)
+            vc2.updateDateString = dateFormater.string(from: names[indexPath.row].updateDate!)
         }
         
-        let imageArray = names[indexPath.row].picturesN?.sortedArray(using: [NSSortDescriptor(key: "picture", ascending: true)])
+        let imageArray = names[indexPath.row].picturesN//.sortedArray(using: [NSSortDescriptor(key: "picture", ascending: true)])
         
         for image in imageArray ?? [] {
             let img = UIImage(data: (image as! Pictures).picture!)
@@ -119,7 +121,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func updateTable() {
-        
         readData()
         tableView.reloadData()
         

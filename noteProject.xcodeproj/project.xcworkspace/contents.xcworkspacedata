@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:nodeProject.xcodeproj">
+      location = "self:/Users/vadimpustovoitov/Documents/GitHub/addNote2/noteProject.xcodeproj">
    </FileRef>
 </Workspace>

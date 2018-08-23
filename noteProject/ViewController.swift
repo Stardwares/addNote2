@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  nodeProject
+//  noteProject
 //
 //  Created by Вадим Пустовойтов on 11.08.2018.
 //  Copyright © 2018 Вадим Пустовойтов. All rights reserved.
@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         do {
-            names = try context.fetch(Nodes.fetchRequest())
+            names = try context.fetch(Notes.fetchRequest())
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
         }
@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    var names = [Nodes]()
+    var names = [Notes]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +51,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        let node = names[indexPath.row]
-        cell!.textLabel!.text = node.value(forKey: "name") as? String
+        let note = names[indexPath.row]
+        cell!.textLabel!.text = note.value(forKey: "name") as? String
         return cell!
     }
     
@@ -63,7 +63,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vc2.titl = names[indexPath.row].name!
         vc2.info = (names[indexPath.row].info)!
         vc2.names = [names[indexPath.row]]
-        vc2.indexNode = indexPath.row
         
         let dateBegCount = names[indexPath.row].begDate?.hashValue
         let dateEndCount = names[indexPath.row].updateDate?.hashValue
@@ -85,8 +84,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let img = UIImage(data: (image as! Pictures).picture!)
             vc2.arrayImage.append(img!)
         }
-        
-        vc2.type = 1
         vc2.isEdit = 1
         vc2.delegate = self
     }
@@ -100,18 +97,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             context.delete(names[indexPath.row])
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
             do {
-                names = try context.fetch(Nodes.fetchRequest())
+                names = try context.fetch(Notes.fetchRequest())
             } catch let error as NSError {
                 print("Could not save \(error), \(error.userInfo)")
             }
-            
             tableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         readData()
     }
     
@@ -123,15 +118,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func updateTable() {
         readData()
         tableView.reloadData()
-        
     }
     
     func readData(){
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         do {
-            let result = try context.fetch(Nodes.fetchRequest())
-            names = result as![Nodes]
+            let result = try context.fetch(Notes.fetchRequest())
+            names = result as![Notes]
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
         }

@@ -13,21 +13,12 @@ class ImageViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     var index: NSInteger = 0
-    
     var delegate: ImageViewCellDelegate? = nil
     
     @IBAction func removeImage(_ sender: Any) {
         if( delegate != nil ) {
             delegate?.removePhoto(index: index)
         }
-    }
-    
-    func hidden() {
-        
-    }
-    
-    func show() {
-        
     }
 }
 protocol ImageViewCellDelegate {

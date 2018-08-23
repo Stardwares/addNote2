@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  nodeProject
+//  noteProject
 //
 //  Created by Вадим Пустовойтов on 11.08.2018.
 //  Copyright © 2018 Вадим Пустовойтов. All rights reserved.

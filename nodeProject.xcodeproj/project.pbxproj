@@ -20,14 +20,14 @@
 /* Begin PBXFileReference section */
 		5AD6B8ED211EA1CC0080EA0F /* nodeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nodeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD6B8F0211EA1CC0080EA0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5AD6B8F2211EA1CC0080EA0F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5AD6B8F2211EA1CC0080EA0F /* ViewController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5AD6B8F5211EA1CC0080EA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5AD6B8F8211EA1CC0080EA0F /* nodeProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = nodeProject.xcdatamodel; sourceTree = "<group>"; };
 		5AD6B8FA211EA1CF0080EA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AD6B8FD211EA1CF0080EA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5AD6B8FF211EA1CF0080EA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5AD6B928211F31670080EA0F /* addNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNote.swift; sourceTree = "<group>"; };
-		5AD6B94B2121C8880080EA0F /* ImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; };
+		5AD6B928211F31670080EA0F /* addNote.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = addNote.swift; sourceTree = "<group>"; tabWidth = 4; };
+		5AD6B94B2121C8880080EA0F /* ImageViewCell.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ImageViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

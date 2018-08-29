@@ -8,37 +8,55 @@
 
 import UIKit
 
+//Review: Code-style (https://github.com/raywenderlich/swift-style-guide) - Классы с заглавной буквы. Для наследников от Cocoa-классов имя должно заканчиваться на базовый класс. Т.е. AddNoteViewController
 class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, ImageViewCellDelegate {
     
+    //Review: Должны быть private, должны быть в MARK секции (код контроллера на несколько страниц)
     @IBOutlet weak var nameNoteText: UITextField!
     @IBOutlet weak var infoNoteText: UITextView!
+    //Review: Опечатка
     @IBOutlet weak var colleectionViewImages: UICollectionView!
     @IBOutlet weak var begDateText: UITextField!
     @IBOutlet weak var updateDateText: UITextField!
     
+    //Review: Те поля что дальше должны быть собраны в модель заметки, инициализированной по умолчанию, чтобы не захламлять контроллер и оперировать уже этой моделью
+    
+    //Review: Должны быть приватными хотя бы сеттеры - private (set)
     var names = [Nodes]()
     var picturesNode = [Pictures]()
+    //Review: Code-style, именование переменных
     var titl :String = ""
     var info = ""
+    //Review: Должен быть enum тип
     var type = 0
-    var picture = UIImage()
+    //Review: Зачем пустое изображение?, пусть будет неинициализировано
+    var picture = UIImage() //
     let imagePicker =  UIImagePickerController()
     var arrayImage: [UIImage] = [UIImage]()
-    var delegate: addNoteDelegate? = nil
+    //Review: Делегаты должны храниться по weak ссылкам (https://medium.com/@JoyceMatos/arc-strong-and-weak-references-in-swift-f2a085a17119, https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html)
+    /* weak */ var delegate: addNoteDelegate? = nil
+    
+    //Review: Должен быть Bool тип
     var isEdit = 0
     
+    
+    //Review: методы которые используются только кнутри класса должны быть private
     @IBAction func saveNote(_ sender: Any) {
+        //Review: не стоит использовать force cast (!), лучше заменить на (nameNoteText.text ?? "")
         self.saveName(name: nameNoteText.text!, info: infoNoteText.text, pictures: arrayImage)
         delegate?.updateTable()
         navigationController?.popViewController(animated: true)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Review: Хоть что-то кинуть в NSLog в обратном случае
         if( UIImagePickerController.isSourceTypeAvailable(.photoLibrary)) {
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
         }
+        
         
         colleectionViewImages.dataSource = self
         colleectionViewImages.delegate = self
@@ -48,18 +66,21 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
         }
     }
 
+    //Review: Ненужный код
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func saveName(name: String, info: String, pictures: [UIImage]){
+    func saveName(name: String, info: String, pictures: [UIImage]) {
+        //Review: Работу с базой данных надо выносить в отдельный класс
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let node = Nodes(entity: Nodes.entity(), insertInto: context)
         let pictureSave = Pictures(entity: Pictures.entity(), insertInto: context)
         
         node.setValue(name, forKey: "name")
         node.setValue(info, forKey: "info")
+        //Review: Code-style
         if isEdit == 0
         {
          node.setValue(NSDate(), forKey: "begDate")
@@ -70,6 +91,15 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
         }
      
 //        let pictureCount = pictures.count // цикл по колличеству картинок если разберусь с таблицей!!!
+        
+        //Review: Лучше так
+        /*
+        for picture in pictures {
+            let pictureN = UIImageJPEGRepresentation(picture, 0.0)
+            pictureSave.setValue(pictureN, forKey: "picture")
+            node.addToPicturesN(pictureSave)
+        }
+        */
         if( pictures.count > 0 ) {
             for index in 0...pictures.count - 1 {
                 let pictureN = UIImageJPEGRepresentation(pictures[index], 0.0)
@@ -87,6 +117,7 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
         }
     }
     
+    //Review: Плохо выделять функцию ради одной строчки
     func presentImagePicker() {
         present(imagePicker, animated: true, completion: nil)
     }
@@ -140,14 +171,25 @@ class addNote: UIViewController, UIImagePickerControllerDelegate,UINavigationCon
         if( indexPath.row == arrayImage.count) {
             presentImagePicker()
         }
+        //Review: Добавить сюда снятие выделения
+        //collectionView.deselectItem(at: indexPath, animated: false)
     }
     
+    //Review: Зачем на Deselect?
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if( indexPath.row == arrayImage.count) {
             presentImagePicker()
         }
     }
 }
+//Review: Если не получается вынести иточник данных и делегат в отдельный класс (хотя в этом случае можно было бы), то лучше делать вот так:
+/*
+ extension addNote: UICollectionViewDelegate {
+    ...
+}
+ */
+
+
 
 protocol addNoteDelegate {
     func updateTable()

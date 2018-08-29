@@ -14,20 +14,21 @@ class ImageViewCell: UICollectionViewCell {
     
     var index: NSInteger = 0
     
-    var delegate: ImageViewCellDelegate? = nil
+    //Review: делегаты должны быть по слабым ссылкам
+    /* weak */ var delegate: ImageViewCellDelegate? = nil
     
     @IBAction func removeImage(_ sender: Any) {
+        //Review: Проверка на nil не нужна
         if( delegate != nil ) {
             delegate?.removePhoto(index: index)
         }
     }
     
+    //Review: Методы подразумевающие действий называть нужно глаголами - hide()
     func hidden() {
-        
     }
     
     func show() {
-        
     }
 }
 protocol ImageViewCellDelegate {

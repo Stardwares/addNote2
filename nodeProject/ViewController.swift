@@ -9,14 +9,18 @@
 import UIKit
 import CoreData
 
+//Review: Именование класса. Непонятно что делает конкретно этот контроллер
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, addNoteDelegate {
 
     @IBAction func addNoteForm(_ sender: Any) {
+        //Review: Навигацию лучше через Storyboard делать
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "addNoteSID") as! addNote
         vc2.delegate = self
         navigationController?.pushViewController(vc2, animated: true)
     }
+    
     @IBAction func deleteAll(_ sender: Any) {
+        //Review: Вынести методы работы с данными в отдельный класс
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         for name in names {
@@ -31,20 +35,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.reloadData()
     }
-    
+    //Review: private
     @IBOutlet weak var tableView: UITableView!
     
     var names = [Nodes]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Review: Делается в Storyboard
         title = "\"The List\""
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    //Review: Вынести методы делегатов и источников данных в отдельный класс/extension к контроллеру
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return names.count
     }
@@ -57,9 +62,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //Review: Простую навигацию лучше через Storyboard, передача параметров в методе prepareToSegue
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "addNoteSID") as! addNote
         navigationController?.pushViewController(vc2, animated: true)
+        
+        //Review: Использование force-cast'ов
         vc2.titl = names[indexPath.row].name!
         vc2.info = (names[indexPath.row].info)!
         let adv: Int = (names[indexPath.row].picturesN?.count)!
@@ -94,7 +101,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         readData()
     }
-    
+    //Review: Ненужный код
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -107,6 +114,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //Review: Вынести в класс работы с базой данных
     func readData(){
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
